@@ -41,13 +41,13 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <img
                 className="h-12 w-12 rounded-full"
-                src="https://cdn.dribbble.com/userupload/17039932/file/original-983633d1f6de58f5d871f174ff34f057.jpg?resize=400x0"
+                src="https://logo-variant.algo.design.vpsvc.com/67931d4357aa555cfe21d61b?sign=7ae2b141f6b00edc8e11b65a3620ee9d482d8ad87f02cd9fe601354d3613a23d&backgroundMode=TRANSPARENT&type=PNG&width=2000"
                 alt="ShopKraftLogo"
               />
-              <span className="text-2xl font-bold text-white">ShopKraft</span>
+              <span className="text-2xl font-bold text-white">Trendzy</span>
             </div>
             <p className="text-gray-400 text-sm max-w-xs">
-            StyleKraft – Shaping the Future of Shopping.
+            Trendzy – Shaping the Future of Shopping.
             </p>
             <div className="flex space-x-6">
               {socialLinks.map((item) => (
@@ -111,7 +111,7 @@ const Footer = () => {
         </div>
         <div className="mt-12 border-t border-gray-700 pt-8">
           <p className="text-base text-gray-400 xl:text-center">
-            © 2025 StyleKraft. All rights reserved.
+            © 2025 Trendzy. All rights reserved.
           </p>
         </div>
       </div>
