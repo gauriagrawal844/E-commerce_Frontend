@@ -100,7 +100,7 @@ const Navbar = () => {
             <div className="flex shrink-0 items-center">
               <img
                 className="h-10 w-10 rounded-full"
-                src="https://cdn.dribbble.com/userupload/17039932/file/original-983633d1f6de58f5d871f174ff34f057.jpg?resize=400x0"
+                src="https://logo-variant.algo.design.vpsvc.com/67931d4357aa555cfe21d61b?sign=7ae2b141f6b00edc8e11b65a3620ee9d482d8ad87f02cd9fe601354d3613a23d&backgroundMode=TRANSPARENT&type=PNG&width=2000"
                 alt="Your Company"
               />
             </div>
