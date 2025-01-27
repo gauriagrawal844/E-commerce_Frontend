@@ -6,12 +6,19 @@ import Navbar from "./UI/Navbar";
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Footer from './UI/Footer';
+import Homepage from './pages/Homepage';
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar/>
       <Routes>
+        <Route 
+        path="/"
+        element={
+            <Homepage/>
+        }
+        /> 
       <Route 
         path="/login"
         element={
