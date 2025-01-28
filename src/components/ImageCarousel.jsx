@@ -35,7 +35,7 @@ const ImageCarousel = () => {
           <div className="relative w-full overflow-hidden">
             <div
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              style={{transform: `translateX(-${currentIndex * 100}%)`}}
             >
               {images.map((image, index) => (
                 <div key={index} className="flex-shrink-0 w-full">
@@ -54,33 +54,6 @@ const ImageCarousel = () => {
                   className={`h-2 w-2 rounded-full ${index === currentIndex ? "bg-white" : "bg-gray-400"}`}
                 ></div>
               ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Cards Section */}
-      <div className="bg-gray-100 py-8">
-        <div className="max-w-screen-xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-8">Explore Categories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="border rounded-lg shadow-lg shadow-black p-6 text-center bg-white w-full max-w-sm h-[400px] transition-transform transform hover:scale-105 hover:shadow-xl">
-              <h3 className="text-xl font-semibold mb-2">Category 1</h3>
-              <p className="text-gray-600">
-                Browse the latest trends in this category and find the perfect fit for you!
-              </p>
-            </div>
-            <div className="border rounded-lg shadow-lg shadow-black p-6 text-center bg-white w-full max-w-sm h-[400px] transition-transform transform hover:scale-105 hover:shadow-xl">
-              <h3 className="text-xl font-semibold mb-2">Category 2</h3>
-              <p className="text-gray-600">
-                Discover unique styles and designs crafted to suit your needs.
-              </p>
-            </div>
-            <div className="border rounded-lg shadow-lg shadow-black p-6 text-center bg-white w-full max-w-sm h-[400px] transition-transform transform hover:scale-105 hover:shadow-xl">
-              <h3 className="text-xl font-semibold mb-2">Category 3</h3>
-              <p className="text-gray-600">
-                Explore deals and exclusive offers on the best products available.
-              </p>
             </div>
           </div>
         </div>

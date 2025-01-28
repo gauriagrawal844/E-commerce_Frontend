@@ -6,7 +6,7 @@ import Navbar from "./UI/Navbar";
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Footer from './UI/Footer';
-import Homepage from './pages/Homepage';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route 
         path="/"
         element={
-            <Homepage/>
+            <Dashboard/>
         }
         /> 
       <Route 
