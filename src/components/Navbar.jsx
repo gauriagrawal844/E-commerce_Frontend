@@ -35,7 +35,7 @@ const Navbar = () => {
   const isSelected = (path) => path === pathname;
 
   const [links, setLinks] = useState([
-    { to: "#", text: "Home" },
+    { to: "/#", text: "Home" },
     { to: "/#", text: "Our Services" },
     { to: "/#", text: "About" },
     { to: "/#", text: "Contact" },
