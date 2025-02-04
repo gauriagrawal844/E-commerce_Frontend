@@ -1,41 +1,71 @@
-import React, { useContext, useState } from "react";
-import { ShopContext } from "../context/ShopContext";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import ProductCard from "./Product";
 
 const Collection = () => {
-    const { products } = useContext(ShopContext);
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedTypes, setSelectedTypes] = useState([]);
     const [sortOrder, setSortOrder] = useState("low-to-high");
 
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get("https://api.escuelajs.co/api/v1/products");
+                setProducts(response.data);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get("https://api.escuelajs.co/api/v1/categories");
+                setCategories(response.data);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        };
+
+        fetchProducts();
+        fetchCategories();
+    }, []);
+
     const handleCategoryChange = (category) => {
         setSelectedCategories((prev) =>
             prev.includes(category)
-                ? prev.filter((cat) => cat !== category) // Remove category if already selected
-                : [...prev, category] // Add category if not selected
+                ? prev.filter((cat) => cat !== category)
+                : [...prev, category]
         );
     };
 
     const handleTypeChange = (type) => {
         setSelectedTypes((prev) =>
             prev.includes(type)
-                ? prev.filter((t) => t !== type) // Remove type if already selected
-                : [...prev, type] // Add type if not selected
+                ? prev.filter((t) => t !== type)
+                : [...prev, type]
         );
     };
 
-    // Sort products based on the selected order (low-to-high or high-to-low)
     const sortedProducts = [...products].sort((a, b) =>
         sortOrder === "low-to-high" ? a.price - b.price : b.price - a.price
     );
 
-    // Filter products by selected categories and types
+    // const filteredProducts = sortedProducts.filter((product) => {
+    //     const isCategoryMatch =
+    //         selectedCategories.length === 0 || selectedCategories.includes(product.category.name.toLowerCase());
+    //     const isTypeMatch = selectedTypes.length === 0 || selectedTypes.includes(product.type.toLowerCase());
+    //     return isCategoryMatch && isTypeMatch;
+    // });
     const filteredProducts = sortedProducts.filter((product) => {
         const isCategoryMatch =
-            selectedCategories.length === 0 || selectedCategories.includes(product.category.toLowerCase());
-        const isTypeMatch = selectedTypes.length === 0 || selectedTypes.includes(product.type.toLowerCase());
+            selectedCategories.length === 0 || selectedCategories.includes(product.category.name.toLowerCase());
+        const isTypeMatch =
+            selectedTypes.length === 0 || (product.type && selectedTypes.includes(product.type.toLowerCase()));
         return isCategoryMatch && isTypeMatch;
     });
+    
 
     return (
         <div className="container mx-auto px-4 py-10">
@@ -45,22 +75,22 @@ const Collection = () => {
                 {/* Sidebar Filters */}
                 <div className="w-full sm:w-1/4 lg:w-1/5 border-r pr-5">
                     <h3 className="text-xl font-semibold mb-4">Filters</h3>
-                    
+
                     <div className="mb-6">
                         <p className="font-medium">CATEGORIES</p>
-                        {["men", "women", "kids"].map((category) => (
+                        {categories.map((category) => (
                             <label
-                                key={category}
+                                key={category.id}
                                 className="block text-sm text-gray-700 hover:bg-gray-200 p-2 rounded cursor-pointer"
                             >
                                 <input
                                     type="checkbox"
-                                    checked={selectedCategories.includes(category)}
-                                    onChange={() => handleCategoryChange(category)}
+                                    checked={selectedCategories.includes(category.name.toLowerCase())}
+                                    onChange={() => handleCategoryChange(category.name.toLowerCase())}
                                     className="mr-2"
-                                    aria-label={`Filter by ${category}`}
+                                    aria-label={`Filter by ${category.name}`}
                                 />
-                                {category.charAt(0).toUpperCase() + category.slice(1)} {/* Capitalize first letter */}
+                                {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
                             </label>
                         ))}
                     </div>
@@ -79,7 +109,7 @@ const Collection = () => {
                                     className="mr-2"
                                     aria-label={`Filter by ${type}`}
                                 />
-                                {type.charAt(0).toUpperCase() + type.slice(1)} {/* Capitalize first letter */}
+                                {type.charAt(0).toUpperCase() + type.slice(1)}
                             </label>
                         ))}
                     </div>
@@ -104,15 +134,10 @@ const Collection = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((product) => (
-                                <div
-                                    key={product.id}
-                                    className="relative overflow-hidden rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl"
-                                >
-                                    <ProductCard product={product} />
-                                </div>
+                                <ProductCard key={product.id} product={product} />
                             ))
                         ) : (
-                            <p className="text-center w-full text-gray-500">No products available</p>
+                            <p className="text-lg">No products found.</p>
                         )}
                     </div>
                 </div>
