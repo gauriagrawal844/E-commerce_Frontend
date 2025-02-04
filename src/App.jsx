@@ -21,6 +21,27 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       <Routes>
+
+        <Route 
+        path="/"
+        element={
+            <Dashboard/>
+        }
+        /> 
+
+        <Route 
+        path="/login"
+        element={
+            <Login/>
+        }
+        />
+
+        <Route
+          path="/signup"
+          element={
+              <SignUp />
+          }
+        />
         <Route
           path="/collection"
           element={
@@ -64,25 +85,6 @@ function App() {
         }
         />
 
-        <Route 
-        path="/"
-        element={
-            <Dashboard/>
-        }
-        /> 
-
-      <Route 
-        path="/login"
-        element={
-            <Login/>
-        }
-        />
-      <Route
-          path="/signup"
-          element={
-              <SignUp />
-          }
-        />
       </Routes>
       <Footer/>
       <Toaster richColors position="top-center"/>
