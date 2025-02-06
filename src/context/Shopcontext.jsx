@@ -1,19 +1,31 @@
-import { createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
-const ShopContext = createContext();
+export const ShopContext = createContext();
 
-const ShopContextProvider = ({ props }) => {
-    const currency = '$';
-    const delivery_fee=10;
-    const value = {
-       products
+export const ShopProvider = ({ children }) => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productResponse = await axios.get('https://fakestoreapi.com/products');
+        const categoryResponse = await axios.get('https://fakestoreapi.com/products/categories');
+
+        setProducts(productResponse.data);
+        setCategories(categoryResponse.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
-    return (
-        <ShopContext.Provider value={value}>
-            {props.children}
-        </ShopContext.Provider>
-    );
-};
+    fetchData();
+  }, []);
 
-export default ShopContextProvider;
+  return (
+    <ShopContext.Provider value={{ products, categories }}>
+      {children}
+    </ShopContext.Provider>
+  );
+};

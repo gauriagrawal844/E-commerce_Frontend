@@ -1,16 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { ShopContext } from "../context/ShopContext";
 
 const AdminPanel = () => {
-    const { products, addProduct, updateProduct, deleteProduct, fetchProducts } = useContext(ShopContext);
+    const { products, addProduct, updateProduct, deleteProduct } = useContext(ShopContext);
     const [newProduct, setNewProduct] = useState({ title: "", category: "", price: "", image: "" });
     const [editId, setEditId] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(20); // Number of products per page
-
-    useEffect(() => {
-        fetchProducts(); // Fetch all products when the component mounts
-    }, [fetchProducts]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,14 +16,6 @@ const AdminPanel = () => {
         }
         setNewProduct({ title: "", category: "", price: "", image: "" });
     };
-
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
-
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
     return (
         <div className="container mx-auto p-5">
@@ -79,7 +65,7 @@ const AdminPanel = () => {
 
             {/* Product List */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {currentProducts.map((product) => (
+                {products.map((product) => (
                     <div key={product.id} className="border p-4">
                         <img src={product.image} alt={product.title} className="w-full h-40 object-cover" />
                         <h3 className="mt-2 text-lg font-medium">{product.title}</h3>
@@ -93,19 +79,6 @@ const AdminPanel = () => {
                             </button>
                         </div>
                     </div>
-                ))}
-            </div>
-
-            {/* Pagination */}
-            <div className="flex justify-center mt-6">
-                {[...Array(Math.ceil(products.length / productsPerPage)).keys()].map((pageNumber) => (
-                    <button
-                        key={pageNumber}
-                        onClick={() => handlePageChange(pageNumber + 1)}
-                        className={`px-4 py-2 border ${currentPage === pageNumber + 1 ? "bg-blue-500 text-white" : ""}`}
-                    >
-                        {pageNumber + 1}
-                    </button>
                 ))}
             </div>
         </div>
