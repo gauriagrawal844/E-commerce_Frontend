@@ -1,14 +1,16 @@
-import React from "react";
-
-const ProductCard = ({ product }) => {
+const Product = ({ product }) => {
     return (
-        <div className="p-4  rounded-lg text-center"> {/* Removed 'border' class */}
-            <img src={product.image} alt={product.title} className="w-full h-60 object-cover rounded" />
-            <h3 className="mt-2 text-lg font-medium">{product.title}</h3>
-            <p className="text-sm text-gray-600">{product.category}</p>
-            <p className="mt-1 text-lg font-bold">${product.price}</p>
-        </div>
+      <div className="bg-white rounded-2xl shadow-md p-6 transition-all hover:shadow-xl hover:-translate-y-2">
+        <img 
+          src={product.image} 
+          alt={product.title} 
+          className="w-full h-56 object-contain mb-4"
+        />
+        <h2 className="text-lg font-semibold text-gray-900 text-center">{product.title}</h2>
+        <p className="text-gray-700 font-bold text-center">${product.price}</p>
+      </div>
     );
-};
-
-export default ProductCard;
+  };
+  
+  export default Product;
+  
