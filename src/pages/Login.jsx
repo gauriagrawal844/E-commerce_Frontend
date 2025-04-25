@@ -47,7 +47,7 @@ const Login = () => {
       localStorage.setItem("isAuthenticated", true)
 
       toast.success(response?.message || "Login successful!")
-      navigate("/dashboard")
+      navigate("/")
     } catch (error) {
       toast.error(error?.response?.data?.message || "Login failed!")
     } finally {
